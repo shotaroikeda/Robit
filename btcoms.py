@@ -32,15 +32,8 @@ def move_signal(btserial, comm, sleep_time=0.1):
     time.sleep(sleep_time)  # 0.1 Default
     ret = btserial.readline()
 
-    return ret
-
-
-def _test():
-    print "Initializing btSerial"
-    btserial = init_serial()
-    
-    print "Testing sending signal..."
-
-if __name__ == '__main__':
-    print "Testing the motors"
-    
+    try:
+        return int(ret.strip())
+    except ValueError:
+        print "Bad value was returned (could be a problem)"
+        return ret.strip()
