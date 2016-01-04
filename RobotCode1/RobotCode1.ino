@@ -5,7 +5,7 @@
 #define BACKWARDLT 9
 #define BACKWARDRT 6
 
-int dir = 0; 
+int dir = 0;
 
 unsigned long duration = 0;
 int vel = 0;
@@ -30,11 +30,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial.available()){
+  if (Serial.available()) {
     int input = Serial.parseInt();
     driveparse(input);
-    
-    switch(dir){
+
+    switch (dir) {
       case 0:
         leftforward();
         rightforward();
@@ -54,8 +54,8 @@ void loop() {
       default:
         allstop();
     }
-    for(int i = duration; i > 0; i--){
-      delay(1000); 
+    for (int i = duration; i > 0; i--) {
+      delay(1000);
     }
     int distance = allstop();
     Serial.println(distance);
@@ -66,27 +66,27 @@ void driveparse(int input) {
   input = input / 10;
   vel = input % 10;
   duration = input / 10;
-  duration = duration; 
+  duration = duration;
 }
 
 void leftforward () {
-  digitalWrite(FORWARDLT, vel * 28);
+  analogWrite(FORWARDLT, vel * 28);
   digitalWrite(BACKWARDLT, LOW);
 }
 
 void rightforward () {
-  digitalWrite(FORWARDRT, vel * 28);
+  analogWrite(FORWARDRT, vel * 28);
   digitalWrite(BACKWARDRT, LOW);
 }
 
 void leftbackward () {
   digitalWrite(FORWARDLT, LOW);
-  digitalWrite(BACKWARDLT, vel * 28);
+  analogWrite(BACKWARDLT, vel * 28);
 }
 
 void rightbackward () {
   digitalWrite(FORWARDRT, LOW);
-  digitalWrite(BACKWARDRT, vel * 28);
+  analogWrite(BACKWARDRT, vel * 28);
 }
 
 int allstop() {
@@ -95,15 +95,15 @@ int allstop() {
   digitalWrite(BACKWARDRT, LOW);
   digitalWrite(BACKWARDRT, LOW);
   int distance = echosense();
-  return(distance);
+  return (distance);
 }
 
-int echosense(){
+int echosense() {
   digitalWrite(TRIG, HIGH);
   delay(10);
   digitalWrite(TRIG, LOW);
-  duration = pulseIn(ECHO,HIGH);
-  int distance= (duration/2)/29.1;
-  return(distance);
+  long echopulse = pulseIn(ECHO, HIGH);
+  long distance = (echopulse / 2) / 29.1;
+  return (distance);
 }
 
