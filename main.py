@@ -15,6 +15,50 @@ def run(t=True, btSerial=None):
     else:
         run_with_serial(btSerial)
 
+        
+def run_with_serial(btSerial):
+    sdl2.ext.init()
+    window = sdl2.ext.Window("Driver Software", size=(800, 600))
+    window.show()
+    running = True
+    while running:
+        events = sdl2.ext.get_events()
+        for event in events:
+            if event.type == sdl2.SDL_QUIT:
+                running = False
+                break
+
+            if event.type == sdl2.SDL_KEYDOWN:
+                if event.key.keysym.sym == sdl2.SDLK_UP:
+                    # Move the Robit Up
+                    print "Move up detected"
+                    move_signal(btSerial, 130, True)
+                elif event.key.keysym.sym == sdl2.SDLK_DOWN:
+                    print "Move down detected"
+                    move_signal(btSerial, 133, True)
+                elif event.key.keysym.sym == sdl2.SDLK_LEFT:
+                    print "Move left detected"
+                    move_signal(btSerial, 132, True)
+                elif event.key.keysym.sym == sdl2.SDLK_RIGHT:
+                    print "Move right detected"
+                    move_signal(btSerial, 131, True)
+                elif event.key.keysym.sym == sdl2.SDLK_SPACE:
+                    print "Force all to stop"
+                    move_signal(btSerial, 115)
+                    break
+
+            elif event.type == sdl2.SDL_KEYUP:
+                if event.key.keysym.sym in (sdl2.SDLK_UP, sdl2.SDLK_LEFT, sdl2.SDLK_DOWN, sdl2.SDLK_RIGHT):
+                    print "Key lifted"
+
+        window.refresh()
+
+        # Make sure the cpu doesn't blow up by forcing thread to sleep
+        time.sleep(0.016)  # Buttery 60 fps
+
+    return 0
+
+
 def run_no_serial():
     sdl2.ext.init()
     window = sdl2.ext.Window("Driver Software", size=(800, 600))
@@ -49,4 +93,4 @@ def run_no_serial():
 if __name__ == "__main__":
     # Set up btSerial here:
     # btSerial = init_serial()
-    run()
+    run(True)
