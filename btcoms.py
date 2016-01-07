@@ -15,7 +15,7 @@ def init_serial(device="/dev/cu.HC-05-DevB", baud=9600):
     return btserial
 
 
-def move_signal(btserial, comm, sleep_time=0.1):
+def move_signal(btserial, comm, wait_for=False, sleep_time=0.1):
     """
     Send a signal to the hardware.
 
@@ -30,6 +30,13 @@ def move_signal(btserial, comm, sleep_time=0.1):
     # Wait time can be variable based off of connectivity
     # Change the value if it's too small
     time.sleep(sleep_time)  # 0.1 Default
+
+    # Wait for movement to finish
+    if wait_for:
+        comm_num = int(comm)
+        comm_num /= 100
+        time.sleep(comm_num)
+
     ret = btserial.readline()
 
     try:
@@ -38,7 +45,3 @@ def move_signal(btserial, comm, sleep_time=0.1):
         print "Bad value was returned (could be a problem)"
         return ret.strip()
 
-def sam_hi():
-    btserial = init_serial()
-    print move_signal(btserial, 140)
-    btserial.close()
