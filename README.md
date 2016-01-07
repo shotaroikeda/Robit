@@ -18,9 +18,8 @@ Controller &amp; Application for Robit
 `$ python main.py`
 
 # About #
-See documentation/creation.md for details on the cars created.
+See [docs](docs/CREATION.md) for details on the cars created.
 
 # Todos #
 1. Better Ardurino documentation
-2. Creating documentation/creation.md
-3. Finishing GUI
+2. Finishing GUI
