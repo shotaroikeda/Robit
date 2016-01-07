@@ -18,7 +18,7 @@ Controller &amp; Application for Robit
 `$ python main.py`
 
 # About #
-See [[GUI-Design]] for details on the cars created.
+See [the wiki](https://github.com/shotaroikeda/Robit/wiki) for details on the car's creation process.
 
 # Todos #
 1. Better Ardurino documentation
