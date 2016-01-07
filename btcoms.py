@@ -37,3 +37,8 @@ def move_signal(btserial, comm, sleep_time=0.1):
     except ValueError:
         print "Bad value was returned (could be a problem)"
         return ret.strip()
+
+def sam_hi():
+    btserial = init_serial()
+    print move_signal(btserial, 140)
+    btserial.close()
