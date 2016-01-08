@@ -32,16 +32,16 @@ def run_with_serial(btSerial):
                 if event.key.keysym.sym == sdl2.SDLK_UP:
                     # Move the Robit Up
                     print "Move up detected"
-                    move_signal(btSerial, 130, True)
+                    move_signal(btSerial, 190, True)
                 elif event.key.keysym.sym == sdl2.SDLK_DOWN:
                     print "Move down detected"
-                    move_signal(btSerial, 133, True)
+                    move_signal(btSerial, 193, True)
                 elif event.key.keysym.sym == sdl2.SDLK_LEFT:
                     print "Move left detected"
-                    move_signal(btSerial, 132, True)
+                    move_signal(btSerial, 192, True)
                 elif event.key.keysym.sym == sdl2.SDLK_RIGHT:
                     print "Move right detected"
-                    move_signal(btSerial, 131, True)
+                    move_signal(btSerial, 191, True)
                 elif event.key.keysym.sym == sdl2.SDLK_SPACE:
                     print "Force all to stop"
                     move_signal(btSerial, 115)
@@ -92,5 +92,5 @@ def run_no_serial():
 
 if __name__ == "__main__":
     # Set up btSerial here:
-    # btSerial = init_serial()
-    run(True)
+    btSerial = init_serial() 
+    run(False, btSerial)
