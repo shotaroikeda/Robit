@@ -93,7 +93,7 @@ int allstop() {
   digitalWrite(FORWARDRT, LOW);
   digitalWrite(FORWARDLT, LOW);
   digitalWrite(BACKWARDRT, LOW);
-  digitalWrite(BACKWARDRT, LOW);
+  digitalWrite(BACKWARDLT, LOW);
   int distance = echosense();
   return (distance);
 }
